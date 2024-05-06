@@ -11,6 +11,14 @@ This code will create a smart contract that yeilds a random lottery
    1. Chainlink VRF for randomness
    2. Chainlink Automation for timed based trigger
 
+## Tests!
+
+1. Write deploy scripts
+2. Write tests 
+   1. work on local chain
+   2. forked testnet
+   3. forket mainnet
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
