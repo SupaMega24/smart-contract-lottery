@@ -36,7 +36,8 @@ contract RaffleTest is Test {
             gasLane,
             subscriptionId,
             callbackGasLimit,
-            link
+            link,
+
         ) = helperConfig.activeNetworkConfig();
         vm.deal(PLAYER, STARTING_USER_BALANCE); // cheatcode to give address eth
     }
@@ -211,19 +212,16 @@ contract RaffleTest is Test {
     //     _;
     // }
 
-    // modifier skipFork() {
-    //     if (block.chainid != 31337) {
-    //         return;
-    //     }
-    //     _;
-    // }
+    modifier skipFork() {
+        if (block.chainid != 31337) {
+            return;
+        }
+        _;
+    }
 
     function testFulfillRandomWordsCanOnlyBeCalledAfterPerformUpkeep(
         uint256 randomRequestId
-    )
-        public
-        raffleEnteredAndTimePassed // skipFork
-    {
+    ) public raffleEnteredAndTimePassed skipFork {
         // Arrange
         // Act / Assert
         vm.expectRevert("nonexistent request");
@@ -237,7 +235,7 @@ contract RaffleTest is Test {
     function testFulfillRandomWordsPicksAWinnerResetsAndSendsMoney()
         public
         raffleEnteredAndTimePassed
-    // skipFork
+        skipFork
     {
         // address expectedWinner = address(1);
 
